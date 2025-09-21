@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TOP UP FIN EL SUKI</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        :root {
+            --primary: #6a11cb;
+            --secondary: #2575fc;
+            --accent: #ff3366;
+            --light: #f8f9fa;
+            --dark: #212529;
+            --success: #28a745;
+        }
+
+        body {
+            background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+            color: var(--light);
+            min-height: 100vh;
+            padding-bottom: 2rem;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+
+        header {
+            text-align: center;
+            padding: 2rem 0;
+        }
+
+        .logo {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            color: white;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        .main-content {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2rem;
+        }
+
+        @media (min-width: 992px) {
+            .main-content {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 1.5rem;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .card-title {
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--accent);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .game-selector {
+            margin-bottom: 1.5rem;
+        }
+
+        select {
+            width: 100%;
+            padding: 1rem;
+            border-radius: 10px;
+            border: none;
+            background: rgba(255, 255, 255, 0.15);
+            color: white;
+            font-size: 1rem;
+            outline: none;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        select:hover {
+            background: rgba(255, 255, 255, 0.25);
+        }
+
+        select option {
+            background: var(--dark);
+            color: white;
+        }
+
+        .price-list {
+            max-height: 400px;
+            overflow-y: auto;
+            padding-right: 0.5rem;
+        }
+
+        .price-list::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .price-list::-webkit-scrollbar-thumb {
+            background: var(--accent);
+            border-radius: 10px;
+        }
+
+        .price-item {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            padding: 1rem;
+            margin-bottom: 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: background 0.3s ease;
+        }
+
+        .price-item:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .price-detail {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .diamond-amount {
+            font-weight: bold;
+            font-size: 1.1rem;
+        }
+
+        .price-amount {
+            color: var(--accent);
+            font-weight: bold;
+        }
+
+        .btn-buy {
+            background: linear-gradient(to right, var(--accent), #ff4b2b);
+            border: none;
+            border-radius: 50px;
+            padding: 0.6rem 1.2rem;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .btn-buy:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 12px rgba(255, 51, 102, 0.4);
+        }
+
+        .payment-methods {
+            margin-top: 2rem;
+        }
+
+        .payment-title {
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .payment-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.8rem;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            margin-bottom: 0.8rem;
+        }
+
+        .payment-wallet {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .wallet-icon {
+            font-size: 1.5rem;
+        }
+
+        .wallet-name {
+            font-weight: bold;
+        }
+
+        .wallet-number {
+            font-family: monospace;
+            background: rgba(0, 0, 0, 0.2);
+            padding: 0.3rem 0.6rem;
+            border-radius: 5px;
+        }
+
+        .whatsapp-btn {
+            display: block;
+            width: 100%;
+            background: linear-gradient(to right, #25D366, #128C7E);
+            color: white;
+            text-align: center;
+            padding: 1rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+            margin-top: 2rem;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .whatsapp-btn:hover {
+            transform: scale(1.02);
+            box-shadow: 0 6px 18px rgba(37, 211, 102, 0.4);
+        }
+
+        .note {
+            margin-top: 2rem;
+            text-align: center;
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+
+        .game-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--accent);
+            margin-right: 0.5rem;
+        }
+
+        .fade-in {
+            animation: fadeIn 0.5s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .pulse {
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo">
+                <i class="fas fa-gamepad"></i>
+            </div>
+            <h1>TOP UP FIN EL SUKI</h1>
+            <p class="subtitle">Top up game mudah, cepat, dan terpercaya</p>
+        </header>
+
+        <div class="main-content">
+            <div class="card">
+                <h2 class="card-title">
+                    <div class="game-icon">
+                        <i class="fas fa-coins"></i>
+                    </div>
+                    Pilih Game & Nominal
+                </h2>
+                
+                <div class="game-selector">
+                    <select id="game-select">
+                        <option value="" disabled selected>Pilih Game</option>
+                        <option value="freefire">Free Fire</option>
+                        <option value="mlbb">Mobile Legends</option>
+                        <option value="pubg">PUBG Mobile</option>
+                        <option value="genshin">Genshin Impact</option>
+                        <option value="other">Game Lainnya</option>
+                    </select>
+                </div>
+                
+                <div class="price-list" id="price-list">
+                    <p style="text-align: center; padding: 2rem;">Pilih game untuk melihat daftar harga</p>
+                </div>
+            </div>
+            
+            <div class="card">
+                <h2 class="card-title">
+                    <div class="game-icon">
+                        <i class="fas fa-wallet"></i>
+                    </div>
+                    Metode Pembayaran
+                </h2>
+                
+                <div class="payment-methods">
+                    <h3 class="payment-title">
+                        <i class="fas fa-money-bill-wave"></i>
+                        E-Wallet
+                    </h3>
+                    
+                    <div class="payment-item">
+                        <div class="payment-wallet">
+                            <div class="wallet-icon" style="color: #25D366;">
+                                <i class="fab fa-whatsapp"></i>
+                            </div>
+                            <div class="wallet-name">DANA</div>
+                        </div>
+                        <div class="wallet-number">082174301182</div>
+                    </div>
+                    
+                    <div class="payment-item">
+                        <div class="payment-wallet">
+                            <div class="wallet-icon" style="color: #00AAEE;">
+                                <i class="fab fa-gofore"></i>
+                            </div>
+                            <div class="wallet-name">GoPay</div>
+                        </div>
+                        <div class="wallet-number">082174301182</div>
+                    </div>
+                </div>
+                
+                <a href="https://wa.me/6283187309574?text=Halo,%20saya%20ingin%20top%20up%20game" class="whatsapp-btn pulse">
+                    <i class="fab fa-whatsapp"></i> Hubungi via WhatsApp
+                </a>
+                
+                <p class="note">
+                    Untuk game lainnya atau bantuan, silahkan hubungi kami via WhatsApp
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const gameSelect = document.getElementById('game-select');
+            const priceList = document.getElementById('price-list');
+            
+            // Data harga game (dalam Rupiah)
+            const gamePrices = {
+                freefire: [
+                    { diamonds: "5 Diamond", price: 1000 },
+                    { diamonds: "50 Diamond", price: 5000 },
+                    { diamonds: "100 Diamond", price: 10000 },
+                    { diamonds: "310 Diamond", price: 30000 },
+                    { diamonds: "520 Diamond", price: 50000 },
+                    { diamonds: "1060 Diamond", price: 100000 },
+                    { diamonds: "2180 Diamond", price: 200000 },
+                    { diamonds: "5600 Diamond", price: 500000 },
+                    { diamonds: "11500 Diamond", price: 1000000 }
+                ],
+                mlbb: [
+                    { diamonds: "16 Diamond", price: 1200 },
+                    { diamonds: "42 Diamond", price: 3000 },
+                    { diamonds: "86 Diamond", price: 6000 },
+                    { diamonds: "172 Diamond", price: 12000 },
+                    { diamonds: "257 Diamond", price: 18000 },
+                    { diamonds: "344 Diamond", price: 24000 },
+                    { diamonds: "429 Diamond", price: 30000 },
+                    { diamonds: "514 Diamond", price: 36000 },
+                    { diamonds: "706 Diamond", price: 50000 },
+                    { diamonds: "2195 Diamond", price: 150000 },
+                    { diamonds: "2900 Diamond", price: 200000 },
+                    { diamonds: "7400 Diamond", price: 500000 },
+                    { diamonds: "15000 Diamond", price: 1000000 }
+                ],
+                pubg: [
+                    { diamonds: "50 UC", price: 14500 },
+                    { diamonds: "125 UC", price: 30000 },
+                    { diamonds: "250 UC", price: 60000 },
+                    { diamonds: "500 UC", price: 120000 },
+                    { diamonds: "1000 UC", price: 240000 },
+                    { diamonds: "1500 UC", price: 360000 },
+                    { diamonds: "2500 UC", price: 600000 },
+                    { diamonds: "5000 UC", price: 1200000 },
+                    { diamonds: "6250 UC", price: 1450000 }
+                ],
+                genshin: [
+                    { diamonds: "60 Genesis", price: 11250 },
+                    { diamonds: "330 Genesis", price: 60000 },
+                    { diamonds: "660 Genesis", price: 120000 },
+                    { diamonds: "1090 Genesis", price: 200000 },
+                    { diamonds: "2240 Genesis", price: 400000 },
+                    { diamonds: "3500 Genesis", price: 600000 },
+                    { diamonds: "6000 Genesis", price: 1000000 },
+                    { diamonds: "15000 Genesis", price: 2500000 },
+                    { diamonds: "30000 Genesis", price: 5000000 }
+                ],
+                other: [
+                    { diamonds: "Game Lainnya", price: 0 }
+                ]
+            };
+            
+            // Fungsi untuk memformat angka sebagai Rupiah
+            function formatRupiah(angka) {
+                return new Intl.NumberFormat('id-ID', {
+                    style: 'currency',
+                    currency: 'IDR',
+                    minimumFractionDigits: 0
+                }).format(angka);
+            }
+            
+            // Fungsi untuk menampilkan daftar harga
+            function showPrices(game) {
+                priceList.innerHTML = '';
+                
+                gamePrices[game].forEach(item => {
+                    const priceItem = document.createElement('div');
+                    priceItem.className = 'price-item fade-in';
+                    
+                    // Untuk game lainnya, tampilkan pesan khusus
+                    if (game === 'other') {
+                        priceItem.innerHTML = `
+                            <div class="price-detail">
+                                <span class="diamond-amount">Game lainnya</span>
+                                <span>Silahkan hubungi WhatsApp untuk ketersediaan</span>
+                            </div>
+                            <button class="btn-buy" onclick="window.open('https://wa.me/6283187309574?text=Halo,%20saya%20ingin%20tanya%20top%20up%20game', '_blank')">
+                                Tanya
+                            </button>
+                        `;
+                    } else {
+                        priceItem.innerHTML = `
+                            <div class="price-detail">
+                                <span class="diamond-amount">${item.diamonds}</span>
+                                <span class="price-amount">${formatRupiah(item.price)}</span>
+                            </div>
+                            <button class="btn-buy" onclick="window.open('https://wa.me/6283187309574?text=Halo,%20saya%20ingin%20beli%20${item.diamonds}%20${game}%20seharga%20${formatRupiah(item.price)}', '_blank')">
+                                Beli
+                            </button>
+                        `;
+                    }
+                    
+                    priceList.appendChild(priceItem);
+                });
+            }
+            
+            // Event listener untuk perubahan select game
+            gameSelect.addEventListener('change', function() {
+                showPrices(this.value);
+            });
+            
+            // Inisialisasi pertama
+            showPrices('freefire');
+            gameSelect.value = 'freefire';
+        });
+    </script>
+</body>
+</html>
